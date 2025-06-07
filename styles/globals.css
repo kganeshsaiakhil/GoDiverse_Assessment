@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn-black {
+    @apply bg-black text-white py-2 px-4 rounded;
+  }
+  
+  .btn-black:hover {
+    @apply bg-gray-800;
+  }
+  
+  .btn-black-outline {
+    @apply border border-black text-black py-2 px-4 rounded;
+  }
+  
+  .btn-black-outline:hover {
+    @apply bg-black text-white;
+  }
+  
+  .btn-red {
+    @apply bg-red-500 text-white py-2 px-4 rounded;
+  }
+  
+  .btn-red:hover {
+    @apply bg-red-600;
+  }
+}
+
+/* Task status indicators */
+.task-overdue {
+  @apply border-l-4 border-red-500;
+}
+
+.task-due-today {
+  @apply border-l-4 border-yellow-500;
+}
+
+/* Notification badge */
+.notification-badge {
+  @apply absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 py-1 text-xs;
+}
+
+/* Form controls */
+.form-input {
+  @apply rounded w-full p-2 border border-gray-300;
+}
+
+.form-label {
+  @apply block text-sm font-medium mb-1;
+}
+
+.form-group {
+  @apply mb-4;
+}
+
+/* Card styles */
+.card {
+  @apply bg-white shadow-md rounded-lg p-6 mb-6;
+}
+
+.card-title {
+  @apply text-xl font-semibold mb-4;
+}
+
+/* Task filters */
+.filter-button {
+  @apply px-3 py-1 rounded-full text-sm;
+}
+
+.filter-button-active {
+  @apply bg-black text-white;
+}
+
+.filter-button-inactive {
+  @apply bg-gray-200 text-gray-700 hover:bg-gray-300;
+}
+
+/* Task badges */
+.task-badge {
+  @apply text-xs px-2 py-1 rounded;
+}
+
+.task-badge-assignee {
+  @apply bg-blue-100;
+}
+
+.task-badge-creator {
+  @apply bg-gray-200;
+}
+
+.task-badge-overdue {
+  @apply bg-red-100 text-red-700;
+}
+
+.task-badge-due-today {
+  @apply bg-yellow-100 text-yellow-700;
+}
+
+.task-badge-normal {
+  @apply bg-gray-200;
+}
