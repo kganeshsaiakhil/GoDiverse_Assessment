@@ -211,4 +211,4 @@ The application includes robust handling for various scenarios:
 ## Authors
 
 - Original Template: [Supabase](https://supabase.com)
-- Enhancements: [Your Name]
+- Enhancements: Akhil Kompella
