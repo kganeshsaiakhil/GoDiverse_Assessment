@@ -64,6 +64,10 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
+## Live Demo
+
+You can try the deployed application here: [go-diverse-assessment.vercel.app](https://go-diverse-assessment.vercel.app/)
+
 ## Database Schema
 
 The application uses the following database tables:
