@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? ''
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const users = data.users.map(user => ({
       id: user.id,
       email: user.email,
-      name: user.user_metadata?.name || null
+      name: user.user_metadata?.name ?? null
     }))
 
     return res.status(200).json({ users })

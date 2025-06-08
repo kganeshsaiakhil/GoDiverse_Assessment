@@ -12,7 +12,7 @@ interface UserSelectorProps {
   currentUserId: string
 }
 
-export default function UserSelector({ onSelect, selectedUserId, currentUserId }: UserSelectorProps) {
+export default function UserSelector({ onSelect, selectedUserId, currentUserId }: Readonly<UserSelectorProps>) {
   const [users, setUsers] = useState<UserProfile[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -57,14 +57,14 @@ export default function UserSelector({ onSelect, selectedUserId, currentUserId }
       <select
         id="user-select"
         className="rounded p-2 border border-gray-300 flex-grow"
-        value={selectedUserId || ''}
+        value={selectedUserId ?? ''}
         onChange={(e) => onSelect(e.target.value || null)}
         disabled={loading || users.length === 0}
       >
         <option value="">Unassigned</option>
         {users.map((user) => (
           <option key={user.id} value={user.id}>
-            {user.name || user.email}
+            {user.name ?? user.email}
           </option>
         ))}
       </select>

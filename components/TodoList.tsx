@@ -9,7 +9,7 @@ import { createTaskAssignmentNotification } from '@/lib/notificationUtils'
 
 type Todos = Database['public']['Tables']['todos']['Row']
 
-export default function TodoList({ session }: { session: Session }) {
+export default function TodoList({ session }: { readonly session: Session }) {
   const supabase = useSupabaseClient<Database>()
   const user = useUser()
   const [todos, setTodos] = useState<Todos[]>([])
@@ -158,7 +158,7 @@ export default function TodoList({ session }: { session: Session }) {
             .select()
             .single();
             
-          if (error && error.message.includes('violates foreign key constraint')) {
+          if (error?.message.includes('violates foreign key constraint')) {
             // If foreign key error, try again without the assigned_to field
             console.warn('User ID not found in database, removing assignment', newTaskAssignedTo);
             const fallbackTodo = {
@@ -199,7 +199,7 @@ export default function TodoList({ session }: { session: Session }) {
         }
 
         // Create a notification if the task was successfully assigned to someone
-        if (todoResult && todoResult.assigned_to && todoResult.assigned_to !== user!.id) {
+        if (todoResult?.assigned_to && todoResult.assigned_to !== user!.id) {
           await createTaskAssignmentNotification(
             supabase,
             todoResult.id,

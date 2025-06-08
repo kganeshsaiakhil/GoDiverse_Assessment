@@ -1,10 +1,9 @@
-import { useState } from 'react'
 
 export type FilterType = 'all' | 'assignedToMe' | 'createdByMe' | 'overdue' | 'dueToday'
 
 interface TaskFilterProps {
-  onFilterChange: (filter: FilterType) => void
-  currentFilter: FilterType
+  readonly onFilterChange: (filter: FilterType) => void
+  readonly currentFilter: FilterType
 }
 
 export default function TaskFilter({ onFilterChange, currentFilter }: TaskFilterProps) {

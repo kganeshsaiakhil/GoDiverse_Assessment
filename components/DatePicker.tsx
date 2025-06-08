@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 
 interface DatePickerProps {
-  onSelect: (date: string | null) => void
-  selectedDate?: string | null
+  readonly onSelect: (date: string | null) => void
+  readonly selectedDate?: string | null
 }
 
 export default function DatePicker({ onSelect, selectedDate }: DatePickerProps) {
-  const [date, setDate] = useState<string>(selectedDate || '')
+  const [date, setDate] = useState<string>(selectedDate ?? '')
 
   useEffect(() => {
     if (selectedDate) {

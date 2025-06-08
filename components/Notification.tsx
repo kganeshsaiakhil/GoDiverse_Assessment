@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 type NotificationType = Database['public']['Tables']['notifications']['Row']
 
-export default function Notification({ userId }: { userId: string }) {
+export default function Notification({ userId }: { readonly userId: string }) {
   const supabase = useSupabaseClient<Database>()
   const [notifications, setNotifications] = useState<NotificationType[]>([])
   const [showNotifications, setShowNotifications] = useState(false)
