@@ -292,7 +292,7 @@ export default function TodoList({ session }: { readonly session: Session }) {
 
   return (
     <div className="w-full">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-6 sticky top-0 z-50 bg-white/90 backdrop-blur-sm py-4 px-6 shadow-md">
         <h1 className="text-3xl font-bold">Task Manager</h1>
         {user && <Notification userId={user.id} />}
       </div>

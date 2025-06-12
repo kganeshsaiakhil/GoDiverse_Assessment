@@ -1,6 +1,6 @@
 import { Database } from '@/lib/schema'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 type NotificationType = Database['public']['Tables']['notifications']['Row']
 
@@ -9,6 +9,26 @@ export default function Notification({ userId }: { readonly userId: string }) {
   const [notifications, setNotifications] = useState<NotificationType[]>([])
   const [showNotifications, setShowNotifications] = useState(false)
   const [unreadCount, setUnreadCount] = useState(0)
+  const notificationRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Handle click outside to close notification panel
+    function handleClickOutside(event: MouseEvent) {
+      if (notificationRef.current && !notificationRef.current.contains(event.target as Node)) {
+        setShowNotifications(false)
+      }
+    }
+
+    // Add event listener when notification panel is open
+    if (showNotifications) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    // Remove event listener when notification panel is closed or component unmounts
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [showNotifications])
 
   useEffect(() => {
     // Fetch initial notifications
@@ -83,9 +103,8 @@ export default function Notification({ userId }: { readonly userId: string }) {
       setUnreadCount(0)
     }
   }
-
   return (
-    <div className="relative">
+    <div className="relative" ref={notificationRef}>
       <button 
         onClick={() => setShowNotifications(!showNotifications)}
         className="relative p-2 text-gray-600 hover:text-gray-900"
@@ -97,12 +116,11 @@ export default function Notification({ userId }: { readonly userId: string }) {
           <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 py-1 text-xs">
             {unreadCount}
           </span>
-        )}
-      </button>
+        )}      </button>
 
       {showNotifications && (
-        <div className="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg overflow-hidden z-50">
-          <div className="p-3 border-b flex justify-between items-center">
+        <div className="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg overflow-hidden z-50 max-h-[80vh]">
+          <div className="p-3 border-b flex justify-between items-center sticky top-0 bg-white">
             <h3 className="text-lg font-medium">Notifications</h3>
             {unreadCount > 0 && (
               <button 
@@ -111,9 +129,8 @@ export default function Notification({ userId }: { readonly userId: string }) {
               >
                 Mark all as read
               </button>
-            )}
-          </div>
-          <div className="max-h-96 overflow-y-auto">
+            )}          </div>
+          <div className="max-h-[calc(80vh-60px)] overflow-y-auto">
             {notifications.length === 0 ? (
               <div className="p-4 text-center text-gray-500">No notifications</div>
             ) : (
