@@ -25,6 +25,9 @@ CREATE POLICY "Individuals can view their own notifications" ON notifications
   
 CREATE POLICY "Individuals can update their own notifications" ON notifications
   FOR UPDATE USING (auth.uid() = user_id);
+  
+CREATE POLICY "Allow inserting notifications" ON notifications
+  FOR INSERT WITH CHECK (true);
 
 -- Update RLS policies for todos to handle task assignments
 DROP POLICY IF EXISTS "Individuals can view their own todos. " ON todos;

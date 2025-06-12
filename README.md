@@ -134,6 +134,12 @@ This application uses Supabase's Row Level Security (RLS) to ensure secure data 
      FOR UPDATE USING (auth.uid() = user_id);
    ```
 
+3. **Insert**: Allow creating notifications for other users (needed for task assignments)
+   ```sql
+   CREATE POLICY "Allow inserting notifications" ON notifications
+     FOR INSERT WITH CHECK (true);
+   ```
+
 ## Using the Application
 
 1. **Authentication**:
